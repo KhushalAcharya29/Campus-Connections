@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { toast, Toaster } from "react-hot-toast";
-
+import Image from 'next/image';
 const rooms = [
   {
     id: 1,
@@ -62,7 +62,7 @@ export default function ApartmentsPage() {
               }
             }}
           >
-            <img
+            <Image
               src={room.image}
               alt={room.name}
               className="w-full h-48 object-cover"

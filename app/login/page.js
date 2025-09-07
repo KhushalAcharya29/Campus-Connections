@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LoginLoader from "@/app/components/LoginLoader";
 import "@/app/styles/Login.css"; // External CSS
+import Image from 'next/image';
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -75,16 +76,16 @@ export default function Login() {
       
       <div className="right-section">
               <div className="profile-circles">
-                <img src="user1.jpg" alt="User 1" className="circle c1" />
-                <img src="user2.jpeg" alt="User 1" className="circle c7" />
-                <img src="user3.jpg" alt="User 1" className="circle c8" />
-                <img src="user4.png" alt="User 1" className="circle c9" />
-                <img src="user5.jpg" alt="User 2" className="circle c2" />
-                <img src="user6.jpg" alt="User 3" className="circle c3" />
-                <img src="user7.jpg" alt="User 4" className="circle c4" />
-                <img src="user8.jpg" alt="User 5" className="circle c5" />
-                <img src="user9.jpg" alt="User 6" className="circle c6" />
-                <img src="user10.jpg" alt="User 6" className="circle c10" />
+                <Image src="user1.jpg" alt="User 1" className="circle c1" />
+                <Image src="user2.jpeg" alt="User 1" className="circle c7" />
+                <Image src="user3.jpg" alt="User 1" className="circle c8" />
+                <Image src="user4.png" alt="User 1" className="circle c9" />
+                <Image src="user5.jpg" alt="User 2" className="circle c2" />
+                <Image src="user6.jpg" alt="User 3" className="circle c3" />
+                <Image src="user7.jpg" alt="User 4" className="circle c4" />
+                <Image src="user8.jpg" alt="User 5" className="circle c5" />
+                <Image src="user9.jpg" alt="User 6" className="circle c6" />
+                <Image src="user10.jpg" alt="User 6" className="circle c10" />
               </div>
             </div>
       

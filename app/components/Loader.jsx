@@ -1,10 +1,11 @@
 "use client";
 import "@/app/styles/Loader.css";
+import Image from 'next/image';
 const Loader = () => {
   return (
     <div className="loader-container">
       <div className="loader-content">
-        <img
+        <Image
           src="/vertical-logo.png"
           width="60px"
           alt="Connect..."

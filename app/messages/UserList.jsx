@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from 'next/image';
 
 export default function UserList({ onSelectChat, selectedChat }) {
   const [search, setSearch] = useState("");
@@ -29,7 +30,7 @@ export default function UserList({ onSelectChat, selectedChat }) {
           className={`chat-item ${selectedChat === user.username ? "active" : ""}`}
           onClick={() => onSelectChat(user.username)} // ✅ Function name now matches
         >
-          <img src={user.avatar} alt="Avatar" className="chat-avatar" />
+          <Image src={user.avatar} alt="Avatar" className="chat-avatar" />
           <div>
             <div className="chat-name">{user.username}</div>
             <div className="chat-last-message">{user.lastMessage}</div>
@@ -37,7 +38,7 @@ export default function UserList({ onSelectChat, selectedChat }) {
         </div>
       ))}
       <div className="user-profile">
-        <img src="/user9.jpg" alt="My Profile" className="profile-avatar" />
+        <Image src="/user9.jpg" alt="My Profile" className="profile-avatar" />
         <div>khushal07</div>
       </div>
     </div>

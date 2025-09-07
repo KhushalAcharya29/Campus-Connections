@@ -152,7 +152,7 @@
 // const renderProfilePhoto = () => {
 //   if (formData.profilePhoto) {
 //     return (
-//       <img
+//       <Image
 //         src={formData.profilePhoto} // Base64-encoded string of the resized image
 //         alt="Profile"
 //         className="w-24 h-24 rounded-full object-cover"
@@ -231,6 +231,7 @@
 "use client"; 
 import { useEffect, useState } from "react";
 import "@/app/styles/profile.css"; // Import the separate CSS file
+import Image from 'next/image';
 
 export default function Profile() {
   const [user, setUser] = useState(null);

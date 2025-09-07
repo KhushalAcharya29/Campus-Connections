@@ -8,7 +8,7 @@ import Tesseract from 'tesseract.js';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import "./signup.css";
-
+import Image from 'next/image';
 
 export default function Signup() {
   const [signupMethod, setSignupMethod] = useState(null);
@@ -436,7 +436,7 @@ return (
           <label className="block text-gray-700">Profile Photo</label>
           {previewImage ? (
             <div className="relative mb-2">
-              <img
+              <Image
                 src={previewImage}
                 alt="Profile Preview"
                 className="w-24 h-24 rounded-full object-cover mb-2"

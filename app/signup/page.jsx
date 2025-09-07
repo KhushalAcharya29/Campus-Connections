@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SpeakButton from "@/app/components/SpeakButton";
 import "./signup.css";
+import Image from 'next/image';
 
 
 export default function Signup() {
@@ -352,7 +353,7 @@ const resizeImage = (file, maxWidth, maxHeight, callback) => {
 
       {/* Right Section */}
       <div className="signup-right">
-        <img
+        <Image
           src="signup-banner.jpeg"
           alt="Signup Banner"
           className="signup-banner"
