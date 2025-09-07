@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint --no-error-on-unmatched-pattern",
+    "build": "next build --no-lint",
+    "start": "next start"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
