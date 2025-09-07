@@ -358,7 +358,7 @@ const resizeImage = (file, maxWidth, maxHeight, callback) => {
           className="signup-banner"
         />
         {/* a slogan below signup banner with written css */}
-        <p><h2>Let's Connect! Together!</h2></p>
+        <p><h2>Let&apos;s Connect! Together!</h2></p>
       </div>
       
     </div>

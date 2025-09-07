@@ -183,7 +183,7 @@ const handleCookieChoice = (choice) => {
                 Click the microphone button and say commands like:
               </p>
               <p className="speech-examples">
-                <strong>"Login"</strong> | <strong>"Sign up"</strong> | <strong>"Open my profile"</strong>
+                <strong>&quot;Login&quot;</strong> | <strong>&quot;Sign Up&quot;</strong> | <strong>&quot;Open my profile&quot;</strong>
               </p>
               <p>
                 You can also speak naturally, like <i>"Hey, I want to create an account."</i>

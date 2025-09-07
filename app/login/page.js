@@ -44,7 +44,7 @@ export default function Login() {
         {loading && <LoginLoader />} {/* Loader when logging in */}
         
         <h1>Welcome back</h1>
-        <p>Don’t have an account? <a href="/signup">Create your profile</a></p>
+        <p>Don&apos;t have an account? <a href="/signup">Create your profile</a></p>
 
         <form onSubmit={handleLogin}>
           <input
