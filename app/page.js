@@ -152,7 +152,7 @@ const handleCookieChoice = (choice) => {
             </div>
             <div className="feature-card">
               <h3>🔒 We Never Sell Your Data</h3>
-              <p>Your personal data stays secure with us. We don't share or sell your information—your privacy matters.</p>
+              <p>Your personal data stays secure with us. We don&apos;t share or sell your information—your privacy matters.</p>
             </div>
             <div className="feature-card">
               <h3>🚫 No Ads, No Distractions</h3>

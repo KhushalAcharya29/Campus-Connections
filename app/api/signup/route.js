@@ -249,7 +249,7 @@ export async function POST(req) {
     const otp = generateOTP();
     const otpExpiresAt = new Date(Date.now() + 2 * 60 * 1000); // 2 minutes from now
 
-    // Create a new user object but don't save it yet
+    // Create a new user object but don&apos;t save it yet
     const newUser = new User({
       firstName,
       lastName,

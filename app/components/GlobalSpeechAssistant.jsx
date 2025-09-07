@@ -66,7 +66,7 @@ const GlobalSpeechAssistant = () => {
       }  else if (transcript.includes("teacher") || transcript.includes("class mam")) {
         speak("oh hello Urshita mam, khushal told me you teach power b i, tell me or khushal if you want some help!");
       }  else if (transcript.includes("vinita") || transcript.includes("hod")) {
-        speak("oh hello Vinita mam, khushal told me you manage the department, but I don't know what you teach, well how can I help you?");
+        speak("oh hello Vinita mam, khushal told me you manage the department, but I don&apos;t know what you teach, well how can I help you?");
       } else {
         speak("Sorry, I didn't understand that. Please try again.");
       }
