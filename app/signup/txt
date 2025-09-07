@@ -1,0 +1,585 @@
+     {/* Manual Signup Form */}
+      {signupMethod === "manual" && (
+        <form
+          className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
+          onSubmit={handleSubmit}
+        >
+          <h2 className="text-2xl font-semibold mb-4 text-center text-gray-900">
+            Manual Signup
+          </h2>
+
+           {/* Profile Photo Upload */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Profile Photo</label>
+          {previewImage ? (
+            <div className="relative mb-2">
+              <img src={previewImage} alt="Profile Preview" className="w-24 h-24 rounded-full object-cover mb-2" />
+              <button 
+                type="button" 
+                className="text-red-500 text-sm" 
+                onClick={removePhoto}
+              >
+                Remove Photo
+              </button>
+            </div>
+          ) : (
+            <input 
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" 
+            />
+          )}
+        </div>
+        
+
+          <div className="mb-4">
+            <label className="block text-gray-700">College Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+              placeholder="name@ratnamcollege.edu.in"
+              pattern=".+@ratnamcollege\.edu\.in$"
+              title="Email must end with @ratnamcollege.edu.in"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700">Username</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+          <label className="block text-gray-700">Password</label>
+          <div className="relative">
+            <input
+              type={passwordVisible ? 'text' : 'password'} // Toggle between text and password type
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+              required
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute right-2 top-2 text-gray-600"
+            >
+              {passwordVisible ? 'Hide' : 'Show'}
+            </button>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700">First Name*</label>
+          <input 
+            type="text" 
+            name="firstName" 
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" 
+            value={formData.firstName} 
+            onChange={handleInputChange} 
+            required 
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700">Last Name*</label>
+          <input 
+            type="text" 
+            name="lastName" 
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" 
+            value={formData.lastName} 
+            onChange={handleInputChange} 
+            required 
+          />
+        </div>
+
+        <h2 className="text-xl font-semibold mt-8">Education Details</h2>
+          {educationDetails.map((education, index) => (
+            <div key={index} className="relative mt-4">
+              <div className="mb-2">
+                <label className="block text-gray-700">
+                  {index === 0 ? 'College Name (Pre-filled)' : 'School/College Name'}
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  value={education.schoolName}
+                  onChange={(e) => handleEducationChange(index, 'schoolName', e.target.value)}
+                  readOnly={index === 0} // Pre-filled field cannot be edited
+                />
+              </div>
+              <div className="flex space-x-4">
+                <div className="w-1/2">
+                  <label className="block text-gray-700">Start Year</label>
+                  <input
+                    type="number"
+                    min="1900"
+                    max="2099"
+                    step="1"
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    value={education.startYear}
+                    onChange={(e) => handleEducationChange(index, 'startYear', e.target.value)}
+                  />
+                </div>
+                <div className="w-1/2">
+                  <label className="block text-gray-700">End Year</label>
+                  <input
+                    type="number"
+                    min="1900"
+                    max="2099"
+                    step="1"
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    value={education.endYear}
+                    onChange={(e) => handleEducationChange(index, 'endYear', e.target.value)}
+                  />
+                </div>
+              </div>
+              {index > 0 && (
+                <button
+                  type="button"
+                  className="absolute top-0 right-0 mt-2 mr-2 px-3 py-1 bg-red-500 text-white rounded-lg"
+                  onClick={() => removeEducationField(index)}
+                >
+                  X
+                </button>
+              )}
+            </div>
+          ))}
+          <button
+            type="button"
+            className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg focus:outline-none"
+            onClick={addEducationField}
+          >
+            Add More Education
+          </button>
+      
+
+
+          {/* Additional Fields */}
+          <div className="mb-4">
+            <label className="block text-gray-700">Headline</label>
+            <input
+              type="text"
+              name="headline"
+              value={formData.headline}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
+          </div>
+
+          <div className="mb-4">
+          <label className="block text-gray-700">Location (Country/Region)</label>
+          <select 
+            name="location"
+            value={formData.location}
+            onChange={handleInputChange}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" 
+            required
+          >
+            <option value="">Select your location</option>
+            {countryOptions.map((country, index) => (
+              <option key={index} value={country}>
+                {country}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700">City</label>
+          <input
+            type="text"
+            name="city"
+            value={formData.city}
+            onChange={handleInputChange}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+            placeholder="Enter your city"
+            required
+          />
+        </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700">Website</label>
+            <input
+              type="url"
+              name="website"
+              value={formData.website}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700">About (Description)</label>
+            <textarea
+              name="about"
+              value={formData.about}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700">Skills</label>
+            <input
+              type="text"
+              name="skills"
+              value={formData.skills}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700">Experience</label>
+            <input
+              type="text"
+              name="experience"
+              value={formData.experience}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-3 bg-blue-600 text-white rounded-lg"
+          >
+            {isLoading ? "Signing Up..." : "Signup"} {/* Change text based on isSignup */}
+          </button>
+        </form>
+      )}
+
+       {/* ID Card Scan Signup */}
+       {signupMethod === 'scan' && (
+        <div className="bg-white p-4 sm:p-6 md:p-8 lg:p-10 rounded-lg shadow-lg max-w-md w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+          <h2 className="text-2xl font-semibold mb-4 text-center text-gray-900">
+            Scan Your College ID
+          </h2>
+          <div className="flex items-center justify-center h-64 bg-gray-200 rounded-lg mb-4">
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              className="w-full h-full object-cover"
+              videoConstraints={{
+                facingMode: "environment", // Use the back camera on mobile devices
+              }}
+            />
+          </div>
+
+          <button
+            onClick={captureImage}
+            className="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white rounded-lg mb-4 hover:bg-blue-700 transition"
+          >
+            Capture Image
+          </button>
+
+          {error && (
+            <div className="bg-red-100 p-4 rounded-lg text-red-700 mb-4">
+              <p>{error}</p>
+            </div>
+          )}
+
+          {scanResult && (
+            <div className="bg-green-100 p-4 rounded-lg text-green-700 mb-4">
+              <p>Scan successful! Extracted information:</p>
+              <pre>{scanResult}</pre>
+            </div>
+          )}
+
+          <button
+            onClick={() => setSignupMethod(null)}
+            className="mt-4 w-full sm:w-auto px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition"
+          >
+            Back
+          </button>
+        </div>
+      )}
+
+
+<form
+          className="signup-form bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
+          onSubmit={handleSubmit}
+        >
+          <h2 className="text-2xl font-semibold mb-4 text-center text-gray-900">
+            Manual Signup
+          </h2>
+        <form
+          className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
+          onSubmit={handleSubmit}
+        >
+          <h2 className="text-2xl font-semibold mb-4 text-center text-gray-900">
+            Manual Signup
+          </h2>
+
+           {/* Profile Photo Upload */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Profile Photo</label>
+          {previewImage ? (
+            <div className="relative mb-2">
+              <img src={previewImage} alt="Profile Preview" className="w-24 h-24 rounded-full object-cover mb-2" />
+              <button 
+                type="button" 
+                className="text-red-500 text-sm" 
+                onClick={removePhoto}
+              >
+                Remove Photo
+              </button>
+            </div>
+          ) : (
+            <input 
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" 
+            />
+          )}
+        </div>
+        
+
+          <div className="mb-4">
+            <label className="block text-gray-700">College Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+              placeholder="name@ratnamcollege.edu.in"
+              pattern=".+@ratnamcollege\.edu\.in$"
+              title="Email must end with @ratnamcollege.edu.in"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700">Username</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+              placeholder="Create a username"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+          <label className="block text-gray-700">Password</label>
+          <div className="relative">
+            <input
+              type={passwordVisible ? 'text' : 'password'} // Toggle between text and password type
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+              placeholder="Enter a strong password"
+              required
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute right-2 top-2 text-gray-600"
+            >
+              {passwordVisible ? 'Hide' : 'Show'}
+            </button>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700">First Name*</label>
+          <input 
+            type="text" 
+            name="firstName" 
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" 
+            value={formData.firstName} 
+            onChange={handleInputChange} 
+            placeholder="Enter your first name"
+            required 
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700">Last Name*</label>
+          <input 
+            type="text" 
+            name="lastName" 
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" 
+            value={formData.lastName} 
+            onChange={handleInputChange} 
+            placeholder="Enter your last name"
+            required 
+          />
+        </div>
+
+        <h2 className="text-xl font-semibold mt-8">Education Details</h2>
+          {educationDetails.map((education, index) => (
+            <div key={index} className="relative mt-4">
+              <div className="mb-2">
+                <label className="block text-gray-700">
+                  {index === 0 ? 'College Name (Pre-filled)' : 'School/College Name'}
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  value={education.schoolName}
+                  onChange={(e) => handleEducationChange(index, 'schoolName', e.target.value)}
+                  readOnly={index === 0} // Pre-filled field cannot be edited
+                />
+              </div>
+              <div className="flex space-x-4">
+                <div className="w-1/2">
+                  <label className="block text-gray-700">Start Year</label>
+                  <input
+                    type="number"
+                    min="1900"
+                    max="2099"
+                    step="1"
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    value={education.startYear}
+                    onChange={(e) => handleEducationChange(index, 'startYear', e.target.value)}
+                  />
+                </div>
+                <div className="w-1/2">
+                  <label className="block text-gray-700">End Year</label>
+                  <input
+                    type="number"
+                    min="1900"
+                    max="2099"
+                    step="1"
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    value={education.endYear}
+                    onChange={(e) => handleEducationChange(index, 'endYear', e.target.value)}
+                  />
+                </div>
+              </div>
+              {index > 0 && (
+                <button
+                  type="button"
+                  className="absolute top-0 right-0 mt-2 mr-2 px-3 py-1 bg-red-500 text-white rounded-lg"
+                  onClick={() => removeEducationField(index)}
+                >
+                  X
+                </button>
+              )}
+            </div>
+          ))}
+          <button
+            type="button"
+            className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg focus:outline-none"
+            onClick={addEducationField}
+          >
+            Add More Education
+          </button>
+      
+
+
+          {/* Additional Fields */}
+          <div className="mb-4">
+            <label className="block text-gray-700">Headline</label>
+            <input
+              type="text"
+              name="headline"
+              value={formData.headline}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
+          </div>
+
+          <div className="mb-4">
+          <label className="block text-gray-700">Location (Country/Region)</label>
+          <select 
+            name="location"
+            value={formData.location}
+            onChange={handleInputChange}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" 
+            required
+          >
+            <option value="">Select your location</option>
+            {countryOptions.map((country, index) => (
+              <option key={index} value={country}>
+                {country}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700">City</label>
+          <input
+            type="text"
+            name="city"
+            value={formData.city}
+            onChange={handleInputChange}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+            placeholder="Enter your city"
+            required
+          />
+        </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700">Website</label>
+            <input
+              type="url"
+              name="website"
+              value={formData.website}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700">About (Description)</label>
+            <textarea
+              name="about"
+              value={formData.about}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700">Skills</label>
+            <input
+              type="text"
+              name="skills"
+              value={formData.skills}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700">Experience</label>
+            <input
+              type="text"
+              name="experience"
+              value={formData.experience}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-3 mt-6 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+          >
+            {isLoading ? "Signing Up..." : "Signup"}
+          </button>
+        </form>

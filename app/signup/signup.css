@@ -1,0 +1,213 @@
+/* Container */
+.signup-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f3f2ef;
+    padding: 2rem;
+  }
+  
+  .signup-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .signup-left {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .signup-right {
+    flex: 1;
+    background-color: #e7e9ee;
+  }
+
+  .signup-right p h2{
+    text-align: center;
+    margin-top: 12px;
+    font-size: larger;
+    font-weight: bold;
+    color: grey;
+  }
+  
+  .signup-banner {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  /* Heading */
+  .welcome-heading {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  /* Buttons */
+  .signup-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .signup-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .google-btn {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+  }
+  
+  .google-btn:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .microsoft-btn {
+    background-color: #f3f2ef;
+    border: 1px solid #666;
+    color: #333;
+  }
+  
+  .microsoft-btn:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .email-btn {
+    background-color: #0073b1;
+    color: #fff;
+    border: none;
+  }
+  
+  .email-btn:hover {
+    background-color: #005983;
+  }
+  
+  .btn-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Option Selection */
+  .option-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .scan-btn {
+    background-color: cornflowerblue;
+    color: white;
+    border: none;
+  }
+  
+  .scan-btn:hover {
+    background-color: royalblue;
+  }
+  
+  .manual-btn {
+    background-color: #3d3535;
+    color: white;
+    border: none;
+  }
+  
+  .manual-btn:hover {
+    background-color: #181717;
+  }
+  
+  /* Text */
+  .agreement-text,
+  .new-user-text {
+    font-size: 0.875rem;
+    color: #666;
+    margin-top: 1rem;
+  }
+  
+  .link {
+    color: #0073b1;
+    text-decoration: none;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
+/* Signup.css */
+
+/* Base styles (desktop stay same) */
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .signup-container {
+    flex-direction: column;      /* stack instead of side by side */
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .signup-left {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .signup-right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  .signup-right img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .signup-buttons {
+    display: flex;
+    flex-direction: column;   /* buttons stacked */
+    gap: 12px;
+    width: 100%;
+  }
+
+  .signup-buttons button {
+    width: 100%;              /* full width for mobile */
+    padding: 14px;
+    font-size: 16px;
+  }
+
+  .agreement-text {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-top: 15px;
+  }
+
+  .login-link {
+    margin-top: 10px;
+    font-size: 15px;
+  }
+}

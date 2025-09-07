@@ -1,0 +1,24 @@
+.speak-container {
+  position: fixed;
+  bottom: 20px;  /* Ensures it stays at the bottom */
+  right: 20px;   /* Keeps it in the bottom-right corner */
+  z-index: 1000;
+}
+
+.stop-speak-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.stop-speak-button:hover {
+  background-color: #cc0000;
+  transform: scale(1.05);
+}
