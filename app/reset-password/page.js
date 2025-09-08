@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function ResetPassword() {
   const [password, setPassword] = useState("");
@@ -14,23 +15,31 @@ export default function ResetPassword() {
   const handleResetPassword = async (e) => {
     e.preventDefault();
 
+    if (!email) {
+      return setMessage("❌ Invalid or missing email.");
+    }
+
     if (password !== confirmPassword) {
       return setMessage("❌ Passwords do not match.");
     }
 
-    const res = await fetch("/api/reset-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch("/api/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (res.ok) {
-      setMessage("✅ Password reset! Redirecting to login...");
-      setTimeout(() => router.push("/login"), 2000);
-    } else {
-      setMessage("❌ " + data.message);
+      if (res.ok) {
+        setMessage("✅ Password reset! Redirecting to login...");
+        setTimeout(() => router.push("/login"), 2000);
+      } else {
+        setMessage("❌ " + (data.message || "Unable to reset password."));
+      }
+    } catch (err) {
+      setMessage("❌ Something went wrong. Please try again.");
     }
   };
 
@@ -59,7 +68,7 @@ export default function ResetPassword() {
         </form>
 
         {message && <p className="message">{message}</p>}
-        <a href="/login">Back to Login</a>
+        <Link href="/login">Back to Login</Link>
       </div>
     </div>
   );

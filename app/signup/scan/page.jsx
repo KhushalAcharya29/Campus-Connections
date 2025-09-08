@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
 import Webcam from 'react-webcam';
@@ -8,7 +8,6 @@ import Tesseract from 'tesseract.js';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import "./signup.css";
-
 
 export default function Signup() {
   const [signupMethod, setSignupMethod] = useState(null);
@@ -39,8 +38,14 @@ export default function Signup() {
   });
 
    // Save form data and education details to localStorage
-   localStorage.setItem('formData', JSON.stringify(formData));
-   localStorage.setItem('educationDetails', JSON.stringify(educationDetails));
+  //  localStorage.setItem('formData', JSON.stringify(formData));
+  //  localStorage.setItem('educationDetails', JSON.stringify(educationDetails));
+  useEffect(() => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("formData", JSON.stringify(formData));
+    localStorage.setItem("educationDetails", JSON.stringify(educationDetails));
+  }
+}, [formData, educationDetails]);
 
   // Handle the method selection (scan or manual)
   const handleScanID = () => {
@@ -135,39 +140,22 @@ export default function Signup() {
     e.preventDefault();
     setIsLoading(true); // Start loader when form is submitted
 
-    // const formData = {
-    // profilePhoto: null,  // New state for profile photo
-    // email: '',
-    // username: '',
-    // password: '',
-    // firstName: '',
-    // lastName: '',
-    // headline: '',
-    // website: '',
-    // about: '',
-    // skills: '',
-    // experience: '',
-    // location: '',
-    // city: '',
-    // };
-
     // Ensure formData is initialized correctly before using it
-  const formData = {
-    username: event.target.username.value,
-    email: event.target.email.value,
-    password: event.target.password.value,
-    firstName: event.target.firstName.value,
-    lastName: event.target.lastName.value,
-    headline: event.target.headline.value,
-    about: event.target.about.value,
-    skills: event.target.skills.value,
-    experience: event.target.experience.value,
-    website: event.target.website.value,
-    city: event.target.city.value,
-    location: event.target.location.value,
-  };
+  const submissionData = {
+  username: e.target.username.value,
+  email: e.target.email.value,
+  password: e.target.password.value,
+  firstName: e.target.firstName.value,
+  lastName: e.target.lastName.value,
+  headline: e.target.headline.value,
+  about: e.target.about.value,
+  skills: e.target.skills.value,
+  experience: e.target.experience.value,
+  website: e.target.website.value,
+  city: e.target.city.value,
+  location: e.target.location.value,
+};
   
-
     // Username validation
   if (formData.username.length > 10) {
     toast.error("Username cannot be more than 10 letters.");
@@ -196,28 +184,6 @@ export default function Signup() {
     setTimeout(() => {
       router.push("/profile");
     }, 3000); // Wait for the toast to finish before redirecting
-
-    // try {
-    //   const response = await fetch('/api/signup', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(formData),
-    //   });
-
-    //   const data = await response.json();
-    //   if (data.success) {
-    //     setIsLoading(false); // Stop loader
-    //     router.push('/otp-verification'); // Redirect to OTP page
-    //   } else {
-    //     alert(data.message || 'Signup failed');
-    //     setIsLoading(false); // Stop loader in case of failure
-    //   }
-    // } catch (error) {
-    //   console.error('Error during signup:', error);
-    //   setIsLoading(false); // Stop loader in case of error
-    // }
 
     try {
       // Sending signup request to the backend API
@@ -248,33 +214,6 @@ export default function Signup() {
       console.error('Error during signup:', error);
       setIsLoading(false); // Stop the loader in case of error
     }
-    
-  
-      // const result = await response.json();
-    //   if (response.ok) {
-    //     alert('Signup successful');
-    //     // You can redirect to the profile page or reset the form
-    //   } else {
-    //     alert(`Error: ${result.message}`);
-    //   }
-    // } catch (error) {
-    //   alert('Error submitting form');
-    // }
-
-  //   if (response.ok && result.otpSent) {
-  //     // Show success toast
-  //     toast.success('OTP successfully sent! Check your mailbox');
-
-  //     // Redirect to OTP page
-  //     router.push('/otp-verification'); // Assuming your OTP verification page is at /otp-verification
-  //   } else {
-  //     // Show error toast for issues with OTP
-  //     toast.error(`Problem in sending OTP, check your connection please`);
-  //   }
-  // } catch (error) {
-  //   // Show error toast for network or other errors
-  //   toast.error('Error submitting form. Please try again.');
-  // }
   };
 
   // Array of country options (can be expanded as needed)
@@ -299,18 +238,6 @@ const removeEducationField = (index) => {
   const updatedEducation = educationDetails.filter((_, i) => i !== index);
   setEducationDetails(updatedEducation);
 };
-
-// const handlePhotoChange = (e) => {
-//     const file = e.target.files[0];
-//     if (file) {
-//       const reader = new FileReader();
-//       reader.onloadend = () => {
-//         setPreviewImage(reader.result); // Show preview
-//       };
-//       reader.readAsDataURL(file);
-//       setFormData({ ...formData, profilePhoto: file }); // Save file
-//     }
-//   };
 
   const removePhoto = () => {
     setFormData({ ...formData, profilePhoto: null });
@@ -364,19 +291,6 @@ const resizeImage = (file, maxWidth, maxHeight, callback) => {
     };
   };
 };
-
-// const handleFileUpload = async (e) => {
-//   const file = e.target.files[0]; // Get the selected file
-//   if (file) {
-//     // Resize the image before saving
-//     resizeImage(file, 500, 500, (resizedBase64) => {
-//       setFormData({
-//         ...formData,
-//         profilePhoto: resizedBase64, // Store the resized base64 string
-//       });
-//     });
-//   }
-// };
 
  // Handle image preview and resizing
  const handleImageChange = (e) => {
@@ -460,4 +374,3 @@ return (
       </div>
     );
   }
-  
