@@ -1,65 +1,95 @@
 "use client";
-import { useEffect, useState } from "react";
-import io from "socket.io-client";
 
-const socket = io(); // Connect to the backend
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
 const ChatBox = ({ currentUser, selectedUser }) => {
+  const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [typing, setTyping] = useState(false);
 
+  // Initialize socket connection once
   useEffect(() => {
-    socket.on("receiveMessage", (message) => {
-      setMessages((prev) => [...prev, message]);
-    });
+    const newSocket = io(); // Connect to backend
+    setSocket(newSocket);
 
-    socket.on("displayTyping", ({ sender }) => {
-      setTyping(sender !== currentUser?._id);
-      setTimeout(() => setTyping(false), 2000);
-    });
-
-    return () => socket.off();
+    return () => {
+      newSocket.disconnect();
+    };
   }, []);
 
-  const sendMessage = () => {
-    if (!newMessage.trim()) return;
-    
-    const messageData = {
-      sender: currentUser?._id,
-      receiver: selectedUser?._id,
-      content: newMessage,
-      seen: false,
+  // Listen for messages and typing events
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleReceiveMessage = (message) => {
+      setMessages((prev) => [...prev, message]);
     };
 
-    socket.emit("sendMessage", messageData);
+    const handleTyping = ({ sender }) => {
+      if (sender !== currentUser?._id) {
+        setTyping(true);
+        setTimeout(() => setTyping(false), 2000);
+      }
+    };
+
+    socket.on("receiveMessage", handleReceiveMessage);
+    socket.on("displayTyping", handleTyping);
+
+    return () => {
+      socket.off("receiveMessage", handleReceiveMessage);
+      socket.off("displayTyping", handleTyping);
+    };
+  }, [socket, currentUser?._id]);
+
+  const sendMessage = () => {
+    if (!newMessage.trim() || !currentUser || !selectedUser) return;
+
+    const messageData = {
+      sender: currentUser._id,
+      receiver: selectedUser._id,
+      content: newMessage,
+      seen: false,
+      id: Date.now().toString(), // unique id for React key
+    };
+
+    socket?.emit("sendMessage", messageData);
     setMessages((prev) => [...prev, messageData]);
     setNewMessage("");
   };
 
   const handleTyping = () => {
-    socket.emit("typing", { sender: currentUser?._id });
+    if (!currentUser) return;
+    socket?.emit("typing", { sender: currentUser._id });
   };
 
   return (
     <div className="chatbox">
       <div className="messages">
-        {messages.map((msg, index) => (
-          <div key={index} className={`message ${msg.sender === currentUser?._id ? "sent" : "received"}`}>
+        {messages.map((msg) => (
+          <div
+            key={msg.id}
+            className={`message ${
+              msg.sender === currentUser?._id ? "sent" : "received"
+            }`}
+          >
             {msg.content}
           </div>
         ))}
-        {typing && <div className="typing-animation">...</div>}
+        {typing && <div className="typing-animation">Typing...</div>}
       </div>
 
-      <input
-        type="text"
-        value={newMessage}
-        onChange={(e) => setNewMessage(e.target.value)}
-        onKeyPress={handleTyping}
-        placeholder="Type a message..."
-      />
-      <button onClick={sendMessage}>Send</button>
+      <div className="input-area">
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          onKeyDown={handleTyping} // updated from onKeyPress
+          placeholder="Type a message..."
+        />
+        <button onClick={sendMessage}>Send</button>
+      </div>
     </div>
   );
 };

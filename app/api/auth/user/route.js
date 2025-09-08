@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic"; // Add this at the top
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/authOptions";
 import dbConnect from "@/app/lib/mongodb";

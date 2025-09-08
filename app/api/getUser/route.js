@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic"; // Add this at the top
 import dbConnect from "@/app/lib/mongodb"; 
 import User from "@/app/models/User"; // Ensure you have a User model
 
