@@ -35,10 +35,10 @@
 
 import mongoose from "mongoose";
 
-const MONGO_URI = process.env.MONGODB_URI;
+const MONGO_URI = process.env.MONGO_URI;
 
 if (!MONGO_URI) {
-  throw new Error("❌ Please define the MONGODB_URI environment variable in .env.local");
+  throw new Error("❌ Please define the MONGO_URI environment variable in .env.local");
 }
 
 // Use global cache so connection isn't re-created on hot reloads in dev
