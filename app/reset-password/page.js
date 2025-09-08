@@ -1,46 +1,42 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
 
 export default function ResetPassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [email, setEmail] = useState(null);  // <--- store safely
   const router = useRouter();
   const searchParams = useSearchParams();
-  const email = searchParams.get("email");
+
+  useEffect(() => {
+    if (searchParams) {
+      setEmail(searchParams.get("email")); // only runs client-side
+    }
+  }, [searchParams]);
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
-
-    if (!email) {
-      return setMessage("❌ Invalid or missing email.");
-    }
 
     if (password !== confirmPassword) {
       return setMessage("❌ Passwords do not match.");
     }
 
-    try {
-      const res = await fetch("/api/reset-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+    const res = await fetch("/api/reset-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (res.ok) {
-        setMessage("✅ Password reset! Redirecting to login...");
-        setTimeout(() => router.push("/login"), 2000);
-      } else {
-        setMessage("❌ " + (data.message || "Unable to reset password."));
-      }
-    } catch (err) {
-      setMessage("❌ Something went wrong. Please try again.");
+    if (res.ok) {
+      setMessage("✅ Password reset! Redirecting to login...");
+      setTimeout(() => router.push("/login"), 2000);
+    } else {
+      setMessage("❌ " + data.message);
     }
   };
 
@@ -69,7 +65,7 @@ export default function ResetPassword() {
         </form>
 
         {message && <p className="message">{message}</p>}
-        <Link href="/login">Back to Login</Link>
+        <a href="/login">Back to Login</a>
       </div>
     </div>
   );
