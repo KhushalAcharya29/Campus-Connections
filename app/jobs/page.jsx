@@ -7,12 +7,13 @@ export default function JobsPage() {
     <div className="relative h-screen flex justify-center items-center overflow-hidden">
       {/* Blurred background */}
       <Image
-              src="/job-blur.png"
-              alt="Feed Background"
-              fill
-              className="object-cover filter blur-sm brightness-50"
-              priority
-            />
+  src="/job-blur.png"
+  alt="Feed Background"
+  fill
+  className="object-cover filter blur-sm brightness-50"
+  priority
+/>
+
       
       {/* Locked overlay */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-4 text-center">

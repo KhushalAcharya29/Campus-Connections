@@ -436,11 +436,14 @@ return (
           <label className="block text-gray-700">Profile Photo</label>
           {previewImage ? (
             <div className="relative mb-2">
-              <Image
-                src={previewImage}
-                alt="Profile Preview"
-                className="w-24 h-24 rounded-full object-cover mb-2"
-              />
+              <Image 
+  src={previewImage}
+  alt="Profile Preview"
+  width={96}
+  height={96}
+  className="w-24 h-24 rounded-full object-cover mb-2"
+/>
+
               <button
                 type="button"
                 className="text-red-500 text-sm"

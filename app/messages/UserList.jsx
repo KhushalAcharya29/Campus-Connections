@@ -30,7 +30,14 @@ export default function UserList({ onSelectChat, selectedChat }) {
           className={`chat-item ${selectedChat === user.username ? "active" : ""}`}
           onClick={() => onSelectChat(user.username)} // ✅ Function name now matches
         >
-          <Image src={user.avatar} alt="Avatar" className="chat-avatar" />
+          <Image 
+  src={user.avatar} 
+  alt="Avatar" 
+  width={40} 
+  height={40} 
+  className="chat-avatar" 
+/>
+
           <div>
             <div className="chat-name">{user.username}</div>
             <div className="chat-last-message">{user.lastMessage}</div>
@@ -38,7 +45,14 @@ export default function UserList({ onSelectChat, selectedChat }) {
         </div>
       ))}
       <div className="user-profile">
-        <Image src="/user9.jpg" alt="My Profile" className="profile-avatar" />
+        <Image 
+  src="/user9.jpg" 
+  alt="My Profile" 
+  width={80} 
+  height={80} 
+  className="profile-avatar" 
+/>
+
         <div>khushal07</div>
       </div>
     </div>

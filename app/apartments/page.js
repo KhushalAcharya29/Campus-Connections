@@ -62,11 +62,15 @@ export default function ApartmentsPage() {
               }
             }}
           >
-            <Image
-              src={room.image}
-              alt={room.name}
-              className="w-full h-48 object-cover"
-            />
+            <div className="relative w-full h-48">
+  <Image
+    src={room.image}
+    alt={room.name}
+    fill
+    className="object-cover rounded-lg"
+  />
+</div>
+
             <div className="p-4">
               <h2 className="text-xl font-semibold text-gray-700">
                 {room.name}

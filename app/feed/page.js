@@ -7,12 +7,14 @@ export default function FeedPage() {
     <div className="relative h-screen w-screen overflow-hidden bg-black">
       {/* Blurred Background Image */}
       <Image
-        src="/feed-blur.png"
-        alt="Feed Background"
-        fill
-        className="object-cover filter blur-md brightness-50"
-        priority
-      />
+  src="/feed-blur.png"
+  alt="Feed Background"
+  fill                 // makes the image fill parent container
+  className="object-cover blur-md brightness-50" 
+  priority             // ensures fast load (good for background images)
+  sizes="100vw"        // tells browser it always spans full width
+/>
+
 
       {/* Lock and Message */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-4 text-center">

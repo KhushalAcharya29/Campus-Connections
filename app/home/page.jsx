@@ -316,9 +316,6 @@ const filteredSuggestions = searchTerm.trim()
     )
   : allSuggestions;
 
-
-
-
 const handleSearchClick = (item) => {
   router.push("/feed"); // Redirect to feed page
 };
@@ -339,16 +336,19 @@ useEffect(() => {
   return () => document.removeEventListener("mousedown", handleClickOutside);
 }, []);
 
-
-
-
   return (
     <div className="min-h-screen bg-gray-100">
       <ToastContainer />
       {/* Header */}
       <header className="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-50">
         <div className="flex items-center space-x-4">
-          <Image src="/logo.jpg" alt="5" className="w-8 h-8" />
+          <Image 
+  src="/logo.jpg" 
+  alt="5" 
+  width={32}    // w-8 = 32px
+  height={32}   // h-8 = 32px
+  className="w-8 h-8" 
+/>
           <input
               type="text"
               placeholder="Campus search..."
@@ -409,12 +409,14 @@ useEffect(() => {
           <Link href="/messages" className="text-gray-600 hover:text-gray-900">Messaging</Link>
       {user && (
         <div className="relative">
-          <Image
-            src="user7.jpg"
-            alt="Profile"
-            className="w-10 h-10 rounded-full cursor-pointer"
-            onClick={() => setIsModalOpen(!isModalOpen)}
-          />
+          <Image 
+  src="user7.jpg"
+  alt="Profile"
+  width={40}    // w-10 = 40px
+  height={40}   // h-10 = 40px
+  className="w-10 h-10 rounded-full cursor-pointer"
+  onClick={() => setIsModalOpen(!isModalOpen)}
+/>
           {isModalOpen && (
             <ProfileModal
               isOpen={isModalOpen}
@@ -434,7 +436,13 @@ useEffect(() => {
         {/* Left Sidebar */}
         <aside className="bg-white p-4 rounded-lg shadow w-full lg:w-1/4 space-y-4">
           <div className="text-center">
-            <Image src="/user7.jpg" alt="Profile" className="w-20 h-20 rounded-full mx-auto mb-4" />
+            <Image 
+  src="/user7.jpg" 
+  alt="Profile" 
+  width={80}    // w-20 = 80px
+  height={80}   // h-20 = 80px
+  className="w-20 h-20 rounded-full mx-auto mb-4" 
+/>
             <h2 className="font-semibold text-lg">Khushal Acharya</h2>
             <p className="text-sm text-gray-500">Full Stack Developer</p>
           </div>
@@ -480,7 +488,13 @@ useEffect(() => {
                 {mediaPreview && (
                   <div className="media-preview">
                     {mediaType === "image" ? (
-                      <Image src={mediaPreview} alt="Preview" className="w-16 h-16 rounded" />
+                      <Image 
+  src={mediaPreview} 
+  alt="Preview" 
+  width={64}    // w-16 = 64px
+  height={64}   // h-16 = 64px
+  className="w-16 h-16 rounded" 
+/>
                     ) : (
                       <video src={mediaPreview} className="w-16 h-16 rounded" controls />
                     )}
@@ -510,7 +524,13 @@ useEffect(() => {
                     </div>
                     <p>{post.content}</p>
                     {post.image && (
-                      <Image src={post.image} alt="Post" className="w-full h-auto rounded-lg mt-2" />
+                      <Image 
+  src={post.image} 
+  alt="Post" 
+  width={800}   // pick a sensible default, since w-full
+  height={600}  // ensures ratio; can adjust to your needs
+  className="w-full h-auto rounded-lg mt-2" 
+/>
                     )}
                     {post.video && (
                       <video src={post.video} controls className="w-full h-auto rounded-lg mt-2" />
@@ -532,7 +552,8 @@ useEffect(() => {
                           {post.comments && post.comments.length > 0 ? (
                             post.comments.map((comment) => (
                               <li key={comment._id} className="p-2 border rounded">
-                               <p className="font-bold">{comment.username || 'Anonymous'}</p>
+                               <p className="font-bold">{comment.username || "Anonymous"}</p>
+
                                <p>{comment.content}</p>
                               </li>
                             ))
@@ -566,22 +587,19 @@ useEffect(() => {
          🏠 Apartments
         </button>
       </Link>
-      
-
-      
         </main>
 
         {/* Right Sidebar */}
         <aside className="bg-white p-4 rounded-lg shadow w-full lg:w-1/4 space-y-4">
           <h2 className="font-semibold text-lg">Trending Now</h2>
           <ul className="text-gray-500 space-y-2">
-            <li>India's 25 fastest-growing jobs</li>
+            <li>India&apos;s 25 fastest-growing jobs</li>
             <li>Fintech funding: India ranks third</li>
             <li>M&A deals surge</li>
           </ul>
           <hr />
           <div>
-            <h2 className="font-semibold text-lg">Today's puzzles</h2>
+            <h2 className="font-semibold text-lg">Today&apos;s puzzles</h2>
             <ul className="text-gray-500 space-y-2">
               <li>Tango</li>
               <li>Queens</li>
@@ -590,9 +608,6 @@ useEffect(() => {
           </div>
         </aside>
       </div>
-
-      
-      
 
       {/* Undo Deletion Notification */}
       {deletingPost && (
@@ -623,8 +638,6 @@ useEffect(() => {
           }
         }
       `}</style>
-
-      
     </div>
   );
 }

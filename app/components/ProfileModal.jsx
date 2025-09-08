@@ -27,7 +27,15 @@ export default function ProfileModal({ isOpen, onClose, user, onSignOut }) {
     <div ref={modalRef} className="absolute right-2 top-14 w-80 bg-white shadow-xl rounded-lg p-4 z-50">
       {/* Profile Section */}
       <div className="flex items-center space-x-3">
-        <Image src="logo.jpg" alt="Profile" className="w-12 h-12 rounded-full" />
+        <Image
+  src="/logo.jpg"
+  alt="Profile"
+  width={48}   // w-12 = 48px
+  height={48}  // h-12 = 48px
+  className="rounded-full"
+  priority     // optional: ensures fast loading for profile/logo
+/>
+
         <div>
           <h2 className="text-lg font-semibold">{user.username}</h2>
           <p className="text-sm text-gray-500">{user.email}</p>

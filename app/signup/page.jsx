@@ -354,10 +354,13 @@ const resizeImage = (file, maxWidth, maxHeight, callback) => {
       {/* Right Section */}
       <div className="signup-right">
         <Image
-          src="signup-banner.jpeg"
-          alt="Signup Banner"
-          className="signup-banner"
-        />
+  src="/signup-banner.jpeg"
+  alt="Signup Banner"
+  width={800}
+  height={200}
+  className="signup-banner"
+/>
+
         {/* a slogan below signup banner with written css */}
         <p><h2>Let&apos;s Connect! Together!</h2></p>
       </div>

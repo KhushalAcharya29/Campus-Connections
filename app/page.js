@@ -21,7 +21,6 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-   // Function to handle email submission
  // Function to handle email submission
  const handleGetStarted = () => {
   if (!email) {
@@ -36,10 +35,7 @@ export default function Home() {
 
   // Show success toast
   toast.success("📩 Email sent successfully! You will be notified when the website opens.", { duration: 3000 });
-
   setEmail(""); // Clear input field after submission
-
-  
  };
 
  useEffect(() => {
@@ -91,11 +87,11 @@ const handleCookieChoice = (choice) => {
         You can now use your voice to navigate. Try saying:
       </p>
       <ul className="text-sm mt-2 list-disc pl-4">
-        <li>"start with hello or who or you?"</li>
-        <li>"I want to Login"</li>
-        <li>"I am new user, want to Signup!"</li>
-        <li>"Open my profile"</li>
-      </ul>
+  <li>&quot;start with hello or who or you?&quot;</li>
+  <li>&quot;I want to Login&quot;</li>
+  <li>&quot;I am new user, want to Signup!&quot;</li>
+  <li>&quot;Open my profile&quot;</li>
+</ul>
     </div>
   </motion.div>
 )}
@@ -130,17 +126,18 @@ const handleCookieChoice = (choice) => {
             {/* Animated Profile Circles */}
             <div className="right-section">
               <div className="profile-circles">
-                <Image src="user1.jpg" alt="User 1" className="circle c1" />
-                <Image src="user2.jpeg" alt="User 1" className="circle c7" />
-                <Image src="user3.jpg" alt="User 1" className="circle c8" />
-                <Image src="user4.png" alt="User 1" className="circle c9" />
-                <Image src="user5.jpg" alt="User 2" className="circle c2" />
-                <Image src="user6.jpg" alt="User 3" className="circle c3" />
-                <Image src="user7.jpg" alt="User 4" className="circle c4" />
-                <Image src="user8.jpg" alt="User 5" className="circle c5" />
-                <Image src="user9.jpg" alt="User 6" className="circle c6" />
-                <Image src="user10.jpg" alt="User 6" className="circle c10" />
-              </div>
+  <Image src="/user1.jpg" alt="User 1" className="circle c1" width={100} height={100} />
+  <Image src="/user2.jpeg" alt="User 2" className="circle c7" width={100} height={100} />
+  <Image src="/user3.jpg" alt="User 3" className="circle c8" width={100} height={100} />
+  <Image src="/user4.png" alt="User 4" className="circle c9" width={100} height={100} />
+  <Image src="/user5.jpg" alt="User 5" className="circle c2" width={100} height={100} />
+  <Image src="/user6.jpg" alt="User 6" className="circle c3" width={100} height={100} />
+  <Image src="/user7.jpg" alt="User 7" className="circle c4" width={100} height={100} />
+  <Image src="/user8.jpg" alt="User 8" className="circle c5" width={100} height={100} />
+  <Image src="/user9.jpg" alt="User 9" className="circle c6" width={100} height={100} />
+  <Image src="/user10.jpg" alt="User 10" className="circle c10" width={100} height={100} />
+</div>
+
             </div>
           </div>
 
@@ -186,15 +183,12 @@ const handleCookieChoice = (choice) => {
                 <strong>&quot;Login&quot;</strong> | <strong>&quot;Sign Up&quot;</strong> | <strong>&quot;Open my profile&quot;</strong>
               </p>
               <p>
-                You can also speak naturally, like <i>"Hey, I want to create an account."</i>
-                or <i>"Open the login page for me."</i>, and the system will respond smartly.
-              </p>
+  You can also speak naturally, like <i>&quot;Hey, I want to create an account.&quot;</i>
+  or <i>&quot;Open the login page for me.&quot;</i>, and the system will respond smartly.
+</p>
               <p>Enjoy a hands-free, smooth user experience! 🚀</p>
             </div>
           </div>
-
-          {/* Add Speech Recognition Button */}
-          {/* <SpeechRecognitionComponent /> */}
         </>
       )}
 
@@ -226,8 +220,6 @@ const handleCookieChoice = (choice) => {
     </div>
   </div>
 )}
-
-
     </div>
   );
 }
