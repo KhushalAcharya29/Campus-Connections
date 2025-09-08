@@ -1,15 +1,19 @@
 import { getServerSession } from "next-auth";
-import dbConnect from "@/app/lib/mongodb"; // Ensure this is your correct DB connection file
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"; // import your next-auth config
+import dbConnect from "@/app/lib/mongodb";
 import User from "@/app/models/User";
 
-export async function GET(req) {
+export async function GET() {
   try {
-    const session = await getServerSession(req);
+    // ✅ Correct way to get session in App Router
+    const session = await getServerSession(authOptions);
+
     if (!session) {
       return new Response(JSON.stringify({ message: "Not authenticated" }), { status: 401 });
     }
 
     await dbConnect();
+
     const user = await User.findOne({ email: session.user.email });
 
     if (!user) {
@@ -18,6 +22,7 @@ export async function GET(req) {
 
     return new Response(JSON.stringify(user), { status: 200 });
   } catch (error) {
+    console.error("API error:", error);
     return new Response(JSON.stringify({ error: "Internal server error" }), { status: 500 });
   }
 }
